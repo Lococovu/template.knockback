@@ -1,0 +1,76 @@
+# Web
+effect send [get] [web] request to %string% and return as %string%:
+  trigger:
+    send a request to "%expression-1%"
+    set {_response} to last http response's body
+
+    set {responses::%expression-2%::body} to {_response}
+
+effect send post [web] request to %string% ([with] body|,) %string% and return as %string%:
+  trigger:
+    send a "post" request to "%expression-1%" with the headers "Content-Type: application/json" and the body "%expression-2%"
+    set {_response} to last http response's body
+
+    set {responses::%expression-3%::body} to {_response}
+
+# Account
+function getAccountID(player: player) :: string:
+  return "%{_player}'s uuid%"
+
+# Notification
+function sendNotification(player: player, text: string, time: number):
+  set {_random} to random integer between 000 and 999
+  
+  set {_notification} to skellett new bossbar
+
+  skellett add {_player} to the bossbar {_notification}
+  skellett show bossbar {_notification}
+
+  set skellett colour of bossbar {_notification} to WHITE
+  # set skellett style of bossbar {_notification} to SEGMENTED_6
+  
+  play sound "block.brewing_stand.brew" with pitch 2 at {_player} for {_player}
+
+  set {_waiting} to true
+
+  # set {_cooldown} to now
+  # add 45 seconds to {_cooldown}
+  # set {notifications::%{_player}%::cooldown} to convert date {_cooldown} to unix date
+            
+  while {_waiting} is true:
+    if {_player} is offline:
+      stop
+
+    if {_time} <= 0:
+      skellett hide bossbar {_notification} 
+      stop
+    
+    if {_time} <= {_time}/2:
+      if {_time} <= {_time}/3:
+        set skellett colour of bossbar {_notification} to RED      
+      else:
+        set skellett colour of bossbar {_notification} to YELLOW
+    set skellett title of bossbar {_notification} to {_text}
+    set skellett progress of bossbar {_notification} to {_time}/6
+    
+    reduce {_time} by 0.05
+    wait 1 tick
+
+# Location
+function getLocation(location: text, world: text) :: location:
+  # Создаём позицию.
+  replace all " " in {_locations::prep} with ""
+  set {_locations::prep::*} to {_location} split at ","
+
+  set {_locations::x} to {_locations::prep::1}
+  set {_locations::y} to {_locations::prep::2}
+  set {_locations::z} to {_locations::prep::3}
+
+  evaluate logging errors in {_errors::*}:
+    set {_location} to location at %{_locations::x}%, %{_locations::y}%, %{_locations::z}% in world "%{_world}%"
+
+  if {_errors::*} is not set:
+  # Отправляем позицию
+    return {_location}
+  else:
+    stop

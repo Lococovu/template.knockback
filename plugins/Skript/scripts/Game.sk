@@ -1,0 +1,153 @@
+function PlayerEntry(player: player):
+  # Настройки
+  set {_player}'s gamemode to survival
+  clear {_player}'s inventory
+  
+  equip({_player})
+
+  # Проверяем игру
+  checkGame()
+  teleport {_player} to {game.%{game.currentId}%.spawn}
+
+#
+# Abilities
+# 
+
+# bow
+on shoot:
+  projectile is arrow
+  set {_item} to shooter's held item
+  
+  set {_loading} to bow of sharpness 1
+  set {_loading}'s name to "&e##"
+
+  set {_template::empty} to "◻◻◻◻◻◻◻◻◻"
+  set {_template::full} to "◼◼◼◼◼◼◼◼"
+
+  set {_cooldown} to 1
+  while {_cooldown} <= 4:
+    set {_temp} to {_loading}
+    replace all "##" in {_temp}'s name with "&e%first {_cooldown} characters of {_template::full}%&7%first 5 - {_cooldown} characters of {_template::empty}%"
+
+    set slot 1 of shooter's inventory to {_temp} 
+
+    add 1 to {_cooldown}
+    wait 1 second
+
+  #
+  set slot 1 of shooter's inventory to {_item}
+  set slot 9 of shooter's inventory to arrow
+
+# pressure plate
+
+# speed
+
+# ender pearl
+
+on inventory click:
+  cancel event
+
+on offhand switch:
+  cancel event
+
+# other
+on projectile hit:
+	delete projectile
+	
+on hunger bar change:
+  cancel event
+  set player's hunger to 20
+
+# checkGame
+function checkGame():
+  if {game.currentId} is not set:
+    randomizeMap()
+
+# randomizeMap
+every 1 minute:
+  add 1 to {game.time}
+
+  if {game.time}/5 is 1 or 2 or 3 or 4 or 5 or 6:
+    loop all players:
+      sendNotification(loop-player, "Новая карта через &e%20 - {game.time}% &fминут.", 6)
+
+  if {game.time} >= 19:
+    set {game.time} to 1
+    randomizeMap()
+
+function randomizeMap():
+  set {game.currentId} to random element of {games::*}
+
+  loop all players:
+    # notifications
+
+    equip(loop-player)
+    teleport loop-player to {game.%{game.currentId}%.spawn}
+
+# 
+# Game start
+# 
+function clear(p: player):	
+	clear {_p}'s inventory
+	clear {_p}'s level
+	heal {_p}
+	set {_p}'s hunger to 20
+
+function equip(p: player):	
+	clear({_p})
+	set slot 0 of {_p} to unbreakable stick of sharpness 1 and knockback 2 named "&es"
+	set slot 1 of {_p} to unbreakable bow named "&7︻デ═一"
+	set slot 2 of {_p} to 64 sandstone
+	set slot 4 of {_p} to gold pressure plate named "&es &fМега-прыжок"
+	set slot 7 of {_p} to feather named "&es &fСкорость"
+	set slot 8 of {_p} to ender pearl named "&es"
+	set slot 9 of {_p} to arrow
+
+
+# 
+# On place & brake
+# 
+on break:
+  if {block::%location of event-block%::placed} is not set:
+    cancel event
+  else:
+    delete {block::%location of event-block%::placed}
+
+on place:
+  if distance between player and {game.%{game.currentId}%.spawn} <= 16:
+    cancel event
+  else:
+    if "%player's held item%" contains "sandstone":
+      set {_id} to random integer between 000 and 999
+      set {_location} to location of event-block
+
+      set {block::%location of event-block%::placed} to {_id} 
+
+      wait 10 seconds
+      if {block::%{_location}%::placed} isn't {_id}:
+        stop
+        
+      wait 1 second
+      set block at {_location} to orange clay
+      wait 1 second
+      set block at {_location} to red clay
+
+      wait 2 seconds
+      set block at {_location} to air
+    else:
+      set {_id} to random integer between 000 and 999
+      set {_location} to location of event-block
+
+      set {block::%location of event-block%::placed} to {_id}
+
+      wait 10 seconds
+      if {block::%{_location}%::placed} isn't {_id}:
+        stop
+      
+      set block at {_location} to air
+
+command setSpawn [<string>]:
+  trigger:
+    set {game.%arg-1%.spawn} to player's location
+    if {games::*} doesn't contain arg-1:
+      add arg 1 to {games::*}
