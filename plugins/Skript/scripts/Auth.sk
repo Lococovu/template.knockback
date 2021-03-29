@@ -3,11 +3,6 @@
 # что ему нельзя делать (пока он не авторизовался)
 # 
 
-on damage:
-  if victim is player:
-    if {authorized::%victim%} or {authorized::%attacker%} is not set:
-      cancel event
-
 on place:
   if {authorized::%player%} is not set:
     cancel event
@@ -46,6 +41,11 @@ on quit:
 # 
 on join:
   set join message to ""
+  clear player's inventory
+
+  set player's health to 20
+  set player's hunger to 20
+
   delete {authorized::%player%}
   delete {temp::%player%::*}
 
@@ -176,7 +176,7 @@ function StartAuthorization(player: player):
         add 1 to {_dots::times}
         set {_request::timer} to 3
 
-        send web request to "https://v1.api.lococovu.me/api/callback/code/%{_code}%" and return as "%{_request}%"
+        send web request to "https://v2.api.lococovu.me/callback/code/%{_code}%" and return as "%{_request}%"
 
       # Проверяем ответ удалённого сервера
       if {responses::%{_request}%::body} is set:
@@ -260,7 +260,7 @@ function AuthorizationDone(player: player):
       add 1 to {_dots::times}
       set {_request::timer} to 3
 
-      send web request to "https://v1.api.lococovu.me/api/profile/%{_profile::token}%" and return as "%{_request}%"
+      send web request to "https://v2.api.lococovu.me/profile/%{_profile::token}%" and return as "%{_request}%"
 
     # Проверяем ответ удалённого сервера
     if {responses::%{_request}%::body} is set:
