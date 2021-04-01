@@ -1,0 +1,33 @@
+on pressure plate:
+  cancel event	
+  push the player upwards at speed 1.0
+  push the player forwards at speed 0.8
+  show mob spawner flames at event-block
+
+# Cooldown
+function wp_megajump_cooldown(player: player):
+  set {_item} to {game::item::megajump}
+
+  set {_template::empty} to "◻◻◻◻◻◻◻◻◻◻◻"
+  set {_template::full} to "◼◼◼◼◼◼◼◼◼◼"
+
+  set {_cooldown} to 1
+  while {_cooldown} < 10:
+    set {_temp} to getTimeIcon(round(11 - {_cooldown}))
+    set {_temp}'s name to "##"
+    replace all "##" in {_temp}'s name with "&e%first {_cooldown} characters of {_template::full}%&7%first 11 - {_cooldown} characters of {_template::empty}%"
+
+    set slot 4 of {_player}'s inventory to {_temp}
+
+    add 0.05 to {_cooldown}
+    wait 1 tick
+
+  send title "&e△ &fМега-прыжок" with subtitle "&e◼◼◼◼◼◼◼◼◼◼" to {_player} for 2 seconds with 0 ticks fade in and 2 ticks fade out
+  set slot 4 of {_player}'s inventory to {_item}
+
+# Action
+on place:
+  if name of player's held item contains "◼" or "◻":
+    cancel event
+  else if name of player's held item contains "Мега-прыжок":
+    wp_megajump_cooldown(player)

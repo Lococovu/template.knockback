@@ -1,0 +1,38 @@
+
+# Cooldown
+function wp_bow_cooldown(player: player):
+  set {_item} to {game::item::bow}
+  
+  set {_template::empty} to "◻◻◻◻◻◻◻◻◻"
+  set {_template::full} to "◼◼◼◼◼◼◼◼"
+
+  set {_cooldown} to 1
+  while {_cooldown} <= 4:
+    set {_temp} to getTimeIcon(round(5 - {_cooldown}))
+    set {_temp}'s name to "##"
+    replace all "##" in {_temp}'s name with "&e%first {_cooldown} characters of {_template::full}%&7%first 5 - {_cooldown} characters of {_template::empty}%"
+
+    if {temp.%{_player}%.hit} is set:
+      delete {temp.%{_player}%.hit}
+      send title "&e➹ &fЛук" with subtitle "&c⚔" to {_player} for 2 seconds with 0 ticks fade in and 2 ticks fade out
+
+      set slot 1 of {_player}'s inventory to {_item}
+      set slot 9 of {_player}'s inventory to arrow    
+
+      stop
+
+    set slot 1 of {_player}'s inventory to {_temp} 
+
+    add 0.05 to {_cooldown}
+    wait 1 tick
+
+  #
+  send title "&e➹ &fЛук" with subtitle "&e◼◼◼◼" to {_player} for 2 seconds with 0 ticks fade in and 2 ticks fade out
+
+  set slot 1 of {_player}'s inventory to {_item}
+  set slot 9 of {_player}'s inventory to arrow
+
+# Action
+on shoot:
+  if projectile is arrow:
+    wp_bow_cooldown(shooter)

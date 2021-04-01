@@ -1,0 +1,26 @@
+# Cooldown
+function wp_pearl_cooldown(player: player):
+  set {_item} to {game::item::pearl}
+
+  set {_template::empty} to "◻◻◻◻◻◻◻◻◻"
+  set {_template::full} to "◼◼◼◼◼◼◼◼"
+
+  set {_cooldown} to 1
+  while {_cooldown} <= 5:
+    set {_temp} to getTimeIcon(round(6 - {_cooldown}))
+    set {_temp}'s name to "##"
+    replace all "##" in {_temp}'s name with "&e%first {_cooldown} characters of {_template::full}%&7%first 6 - {_cooldown} characters of {_template::empty}%"
+
+    set slot 3 of {_player}'s inventory to {_temp} 
+
+    add 0.05 to {_cooldown}
+    wait 1 tick
+
+  #
+  send title "&e○ &fПёрл" with subtitle "&e◼◼◼◼◼◼" to {_player} for 2 seconds with 0 ticks fade in and 2 ticks fade out
+  set slot 3 of {_player}'s inventory to {_item}
+  
+# Action
+on shoot:
+  if projectile is ender pearl:
+    wp_pearl_cooldown(shooter)

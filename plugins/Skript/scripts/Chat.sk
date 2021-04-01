@@ -1,0 +1,6 @@
+on chat:
+  cancel event
+  if {authorized::%player%} is not set:
+    stop
+
+  broadcast "&7%player%: &f%message%"

@@ -93,7 +93,7 @@ worlds:
     generator: 'null'
     playerLimit: '-1'
     allowFlight: 'true'
-  '3':
+  world:
     ==: MVWorld
     hidden: 'false'
     alias: ''
@@ -127,16 +127,16 @@ worlds:
     keepSpawnInMemory: 'true'
     spawnLocation:
       ==: MVSpawnLocation
-      x: 183.0
-      y: 50.0
-      z: 1218.0
+      x: 0.0
+      y: 64.0
+      z: -224.0
       pitch: 0.0
       yaw: 0.0
     autoLoad: 'true'
     bedRespawn: 'true'
     worldBlacklist: []
     environment: NORMAL
-    seed: '-6783434382471643986'
+    seed: '-4595544926004467294'
     generator: 'null'
     playerLimit: '-1'
     allowFlight: 'true'
@@ -187,7 +187,7 @@ worlds:
     generator: 'null'
     playerLimit: '-1'
     allowFlight: 'true'
-  world:
+  '3':
     ==: MVWorld
     hidden: 'false'
     alias: ''
@@ -221,16 +221,16 @@ worlds:
     keepSpawnInMemory: 'true'
     spawnLocation:
       ==: MVSpawnLocation
-      x: 0.0
-      y: 64.0
-      z: -224.0
+      x: 183.0
+      y: 50.0
+      z: 1218.0
       pitch: 0.0
       yaw: 0.0
     autoLoad: 'true'
     bedRespawn: 'true'
     worldBlacklist: []
     environment: NORMAL
-    seed: '-4595544926004467294'
+    seed: '-6783434382471643986'
     generator: 'null'
     playerLimit: '-1'
     allowFlight: 'true'

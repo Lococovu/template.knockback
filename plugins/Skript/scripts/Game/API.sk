@@ -1,0 +1,43 @@
+function PlayerEntry(player: player):
+  # Настройки
+  set {_player}'s gamemode to survival
+  clear {_player}'s inventory
+  
+  equip({_player})
+
+  # Проверяем игру
+  checkGame()
+  teleport {_player} to {game.%{game.currentId}%.spawn}
+
+# checkGame
+function checkGame():
+  if {game.currentId} is not set:
+    randomizeMap()
+
+function randomizeMap():
+  delete {game.current::*}
+  set {game.currentId} to random element of {games::*}
+
+  loop all players:
+    # notifications
+
+    equip(loop-player)
+    teleport loop-player to {game.%{game.currentId}%.spawn}
+
+function clear(p: player):	
+	clear {_p}'s inventory
+	clear {_p}'s level
+	heal {_p}
+	set {_p}'s hunger to 20
+
+function equip(p: player):	
+	clear({_p})
+	set slot 0 of {_p} to {game::item::stick}
+	set slot 1 of {_p} to {game::item::bow}
+	set slot 2 of {_p} to {game::item::blocks}
+	set slot 3 of {_p} to {game::item::pearl}
+	set slot 4 of {_p} to {game::item::megajump}
+	set slot 9 of {_p} to arrow
+
+function getTimeIcon(time: number) :: item:
+  return {getTimeIcon::%{_time}%}

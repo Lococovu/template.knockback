@@ -15,7 +15,15 @@ effect send post [web] request to %string% ([with] body|,) %string% and return a
 
 # Account
 function getAccountID(player: player) :: string:
-  return "%{_player}'s uuid%"
+  set {_name} to {_player}'s display name
+  set {_ip} to {_player}'s ip
+
+  set {_id} to "%{_name}% at %{_ip}%" hashed with SHA-256
+  return {_id}
+
+command test:
+  trigger:
+    delete {ip::*}
 
 # Notification
 function sendNotification(player: player, text: string, time: number):

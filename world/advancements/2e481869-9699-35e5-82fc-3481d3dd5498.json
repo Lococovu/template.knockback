@@ -41,6 +41,12 @@
     },
     "done": true
   },
+  "minecraft:recipes/combat/spectral_arrow": {
+    "criteria": {
+      "has_glowstone_dust": "2021-04-01 09:59:01 +0300"
+    },
+    "done": true
+  },
   "minecraft:recipes/building_blocks/sandstone_stairs": {
     "criteria": {
       "has_sandstone": "2021-03-29 09:33:27 +0300"
@@ -50,6 +56,12 @@
   "minecraft:recipes/tools/wooden_hoe": {
     "criteria": {
       "has_stick": "2021-03-29 09:33:27 +0300"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/glowstone": {
+    "criteria": {
+      "has_glowstone_dust": "2021-04-01 09:59:01 +0300"
     },
     "done": true
   },
@@ -175,6 +187,12 @@
   "minecraft:adventure/root": {
     "criteria": {
       "killed_by_something": "2021-03-29 09:35:14 +0300"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/redstone_lamp": {
+    "criteria": {
+      "has_glowstone": "2021-04-01 09:26:19 +0300"
     },
     "done": true
   },
