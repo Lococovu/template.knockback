@@ -1,0 +1,91 @@
+command settings [<text>]:
+  trigger:
+    if arg 1 is not set:
+      open virtual chest inventory with size 6 named "&8Настройки" to player
+    
+      # Пустые слоты
+      set {_empty} to player head named "&f"
+      add "{SkullOwner:{Id:""ee6cb849-1384-4efa-bed7-23ff26bf79b1"",Properties:{textures:[{Value:""eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYWQ5MzExN2I5ZTE4MGUwZGMzOWU1ZThhMDUwODQ4MmNmMWY2MGU0NDZlMDIyOTc4ZmUwNjUxYTU2MmE1OTdmIn19fQ==""}]}}}" to item-nbt of {_empty}
+
+      set {_slots::*} to 13, 21,22,23, 30,31,32, 39,40,41
+      format gui slot {_slots::*} of player with {_empty}
+
+      # Назад (или домой)
+      if size of {temp::%player%::return::*} > 0:
+        set {_return::*} to {temp::%player%::return::*}
+        set {_cmd} to last element of {temp::%player%::return::*}
+
+        delete {temp::%player%::return::*}
+
+        # Назад
+        set {_back} to player head named "&e◁ &fВернуться назад" with lore "", "&f &fВозвращает вас туда, где вы были буквально", "&f &fмомент назад!", "", "&7%{_cmd}%"
+        add "{SkullOwner:{Id:""0216fff0-74cd-4468-ac75-9614475231d9"",Properties:{textures:[{Value:""eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvY2RjOWU0ZGNmYTQyMjFhMWZhZGMxYjViMmIxMWQ4YmVlYjU3ODc5YWYxYzQyMzYyMTQyYmFlMWVkZDUifX19""}]}}}" to item-nbt of {_back}
+
+        format gui slot 13 of player with {_back} to run:
+          remove {_cmd} from {_return::*}
+          
+          set {temp::%player%::return::*} to {_return::*}
+          execute player command "%{_cmd}%"
+      else:
+        # Домой
+        set {_home} to player head named "&e☖ &fДомой" with lore "", "&f &fКнопка, которая просто возвращает вас на главную", "&f &fстраничку сервера."
+        add "{SkullOwner:{Id:""67303f01-b659-4ce5-8706-b623a16c1db2"",Properties:{textures:[{Value:""eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvY2Y3Y2RlZWZjNmQzN2ZlY2FiNjc2YzU4NGJmNjIwODMyYWFhYzg1Mzc1ZTlmY2JmZjI3MzcyNDkyZDY5ZiJ9fX0=""}]}}}" to item-nbt of {_home}
+
+        format gui slot 13 of player with {_home} to run:
+          set {temp::%player%::return::*} to {_return::*}
+          execute player command "/menu"
+
+    # Менюшки
+    else:
+      if arg 1 is "items":
+        open virtual chest inventory with size 6 named "&8Настройки расположения" to player
+
+        # Пустые слоты
+        set {_empty} to player head named ""
+        add "{SkullOwner:{Id:""ee6cb849-1384-4efa-bed7-23ff26bf79b1"",Properties:{textures:[{Value:""eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYWQ5MzExN2I5ZTE4MGUwZGMzOWU1ZThhMDUwODQ4MmNmMWY2MGU0NDZlMDIyOTc4ZmUwNjUxYTU2MmE1OTdmIn19fQ==""}]}}}" to item-nbt of {_empty}
+
+        set {_slots::*} to 3,4,5
+        format gui slot {_slots::*} of player with {_empty}
+
+        # Добавить новую конфигурацию
+        set {_layout::add} to player head named "&e &fДобавить"
+
+        # Изменить текущую
+        set {_layout::edit} to player head named "&e &fИзменить текущую"
+        
+        set {_slot} to first element of {_slots::*}
+        remove {_slot} from {_slots::*}
+
+        format gui slot {_slot} of player with {_layout::edit} to run:
+          close player's inventory
+
+          layoutEditor(player, getInvLayout(player))
+
+        # Список всех конфигураций
+        set {_slot} to 9
+        set {_number} to 1
+        set {_currentInv} to getInvLayout(player)
+        set {_list::*} to {player::%player%::inventory::layouts::*}
+
+        loop {_list::*}:
+          # Берём информацию о конфигурации
+          set {_item} to player head named "&e%getNumber({_number})% &7Конфигурация" with lore "", "&e &fРасположение предметов:", ""
+          set {_items::*} to {player::%player%::inventory::layout::%loop-value%::items::*}
+
+          set {_itemNumber} to 0
+          loop {_items::*}:
+            set {_temp::*} to loop-value-2 split at "/"
+            set {_weapon} to {game::item::%{_temp::1}%}
+
+            if {_item} is set:
+              add "&e%getNumber({_itemNumber})% &f%{_weapon}'s name% &7(%{_temp::2} + 1% слот)" to {_item}'s lore
+
+              add 1 to {_itemNumber}
+
+          format gui slot {_slot} of player with {_item}
+
+          add 1 to {_number}
+          add 1 to {_slot}
+
+      else:
+        execute player command "/settings"

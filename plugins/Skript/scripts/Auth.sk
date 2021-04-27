@@ -99,8 +99,8 @@ function StartAuthorization(player: player):
   teleport {_player} to {_location}
 
   # Настраеваем голограммы
-  set {_holo::web::lines::*} to "&9☁ &fАвторизация", "&fЯ хочу авторизоваться", "&fв свой аккаунт."
-  set {_holo::web::hover::*} to {_holo::web::lines::*}, "", "&9○ &fНажмите &9ПКМ &fчто бы выбрать"
+  set {_holo::web::lines::*} to "&9☁ &fАвторизация &c⚠ Выключено", "&fЯ хочу авторизоваться", "&fв свой аккаунт."
+  set {_holo::web::hover::*} to {_holo::web::lines::*}, "", "&9i &fХотите знать про прогресс разработки сайта?", "&fТогда вам сюда - &9discord&7.lococovu.me", "&0ПКМ"
 
   set {_holo::guest::lines::*} to "&e⚔ &fИграть", "&fЯ уже хочу играть! Просто", "&fпустите меня на сервер!"
   set {_holo::guest::hover::*} to {_holo::guest::lines::*}, "", "&e○ &fНажмите &eПКМ &fчто бы выбрать"
@@ -146,11 +146,7 @@ function StartAuthorization(player: player):
     if {_player} doesn't have night vision:
       apply potion of night vision of tier 4 without any particles to {_player} for 1 day
 
-    set {_players::*} to all players
-    remove {_player} from {_players::*}
-
-    hide {_player} to {_players::*}
-    hide {_players::*} to {_player}
+    hide {_player}
 
     # Боссбар
     if {_bossbar} is not set:
@@ -182,7 +178,7 @@ function StartAuthorization(player: player):
         delete hologram {_holo::guest}
 
         if {_yaw} >= 180:
-          set {_action} to 1
+          # set {_action} to 1
         else:
           hide bossbar {_bossbar}
 
@@ -365,8 +361,7 @@ function StartAuthorization(player: player):
 # Авторизация выполенна успешно
 # 
 function AuthorizationDone(player: player):
-  reveal {_player} to all players
-  reveal all players for {_player}
+  reveal {_player}
 
   clear {_player}'s inventory
   remove night vision from {_player}
@@ -462,6 +457,8 @@ function AuthorizationDone(player: player):
   wait 2 seconds
 
   # TODO
+  if {jail::%{_player}%::time} > 0:
+    jailWorker({_player})
 
   # Просто телепортируем игрока на квартирку
   PlayerEntry({_player})

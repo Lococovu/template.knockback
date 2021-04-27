@@ -40,28 +40,19 @@ on script load:
   set {getTimeIcon::9} to {_time::9}
   set {getTimeIcon::10} to {_time::10}
 
-
   # Подготавливаем игровые предметы
-  set {game::item::stick} to unbreakable stick of sharpness 1 and knockback 2 named "&es"
+  set {game::item::stick} to unbreakable stick of sharpness 1 and knockback 2 named "&e╱ &fПалка"
   set {game::item::bow} to unbreakable bow named "&7︻デ═一"
-  set {game::item::blocks} to 64 sandstone
-  set {game::item::pearl} to ender pearl named "&es"
-  set {game::item::megajump} to gold pressure plate named "&es &fМега-прыжок"
-
-every 5 seconds:
-  loop all players:
-    if {authorized::%loop-player%} is set:
-      add loop-player to {_players::*}
-
-  reveal {_players::*} to {_players::*}
+  set {game::item::blocks} to 64 sandstone named "&e▤ &fБлоки"
+  set {game::item::pearl} to ender pearl named "&e◯ &fПёрл"
+  set {game::item::megajump} to gold pressure plate named "&eΔ &fМега-прыжок"
 
 on drop:
+  player's gamemode is not creative
   cancel event
 
 on pickup:
-  cancel event
-
-on inventory click:
+  player's gamemode is not creative
   cancel event
 
 on offhand switch:
@@ -73,6 +64,7 @@ on hunger bar change:
 
 # Break
 on break:
+  player's gamemode is not creative
   if {block::%location of event-block%::placed} is not set:
     cancel event
   else:
@@ -80,37 +72,35 @@ on break:
 
 # Place
 on place:
-  if distance between player and {game.%{game.currentId}%.spawn} <= 16:
-    cancel event
-  else:
-    if "%player's held item%" contains "sandstone":
-      set {_id} to random integer between 000 and 999
-      set {_location} to location of event-block
+  player's gamemode is not creative
+  if "%player's held item%" contains "sandstone":
+    set {_id} to random integer between 000 and 999
+    set {_location} to location of event-block
 
-      set {block::%location of event-block%::placed} to {_id} 
+    set {block::%location of event-block%::placed} to {_id} 
 
-      wait 10 seconds
-      if {block::%{_location}%::placed} isn't {_id}:
-        stop
-        
-      wait 1 second
-      set block at {_location} to orange clay
-      wait 1 second
-      set block at {_location} to red clay
-
-      wait 2 seconds
-      set block at {_location} to air
-    else:
-      set {_id} to random integer between 000 and 999
-      set {_location} to location of event-block
-
-      set {block::%location of event-block%::placed} to {_id}
-
-      wait 10 seconds
-      if {block::%{_location}%::placed} isn't {_id}:
-        stop
+    wait 10 seconds
+    if {block::%{_location}%::placed} isn't {_id}:
+      stop
       
-      set block at {_location} to air
+    wait 1 second
+    set block at {_location} to orange clay
+    wait 1 second
+    set block at {_location} to red clay
+
+    wait 2 seconds
+    set block at {_location} to air
+  else:
+    set {_id} to random integer between 000 and 999
+    set {_location} to location of event-block
+
+    set {block::%location of event-block%::placed} to {_id}
+
+    wait 10 seconds
+    if {block::%{_location}%::placed} isn't {_id}:
+      stop
+    
+    set block at {_location} to air
 
 every 1 second:
   loop all players:
@@ -123,8 +113,12 @@ every 1 second:
           glowing of loop-player is true
           set glowing of loop-player to false
 
-      {game.bossbar} is set
-      skellett add loop-player to bossbar {game.bossbar}
+      if {jail::%loop-player%::time} >= 0:
+        if {game.bossbar}'s players contains loop-player:
+          remove loop-player from bossbar {game.bossbar}
+      else:
+        {game.bossbar} is set
+        skellett add loop-player to bossbar {game.bossbar}
 
   # Creating skellett bossbar
   if {game.bossbar} is not set:
@@ -134,7 +128,7 @@ every 1 second:
     skellett show bossbar {game.bossbar}
 
   # Progress
-  set skellett progress of bossbar {game.bossbar} to (1/600) * {game.time}
+  set skellett progress of bossbar {game.bossbar} to (1/900) * {game.time}
 
   # Title
   if {game.current::king} is not set:
@@ -143,23 +137,8 @@ every 1 second:
     set skellett title of bossbar {game.bossbar} to "&e♜ &fКороль: &e%{game.current::king}% &7(%{game.current::%{game.current::king}%.kills}% убийств)"
 
 
-# randomizeMap
-every 1 second:
-  add 1 to {game.time}
-
-  if {game.time}/60 is 1 or 2 or 3 or 4 or 5 or 6 or 7 or 8 or 9 or 10:
-    loop all players:
-      sendNotification(loop-player, "Новая карта через &e%10 - (round({game.time}/60))% &fминут.", 6)
-
-  if {game.time} >= 600:
-    set {game.time} to 1
-    randomizeMap()
-
-
 # Дамаг
 on damage:
-  if distance between victim and {game.%{game.currentId}%.spawn} < 16:
-    cancel event
 
   set {game.%victim%.lastHit} to attacker
   if damage cause is fall:
@@ -191,13 +170,22 @@ on damage:
 
 on death:
   # Проверяем то, от кого умер игрока
+  add 1 to {game.current::%player%::deaths}
+  add 1 to {statistics::%player%::deaths}  
+  
   if {game.%player%.lastHit} is set:
     set {_player} to {game.%player%.lastHit}
     delete {game.%player%.lastHit}
 
     if "%{_player}%" isn't "%player%":
-      broadcast "%{_player}% убил %player%"
-
+      loop all players:
+        if {authorized::%loop-player%} is true:
+          play sound "block.end_portal_frame.fill" with pitch 1 at loop-player for loop-player
+          if "%loop-player%" is "%{_player}%":
+            send action bar "&7♡ &fВы убили %player%" to loop-player
+          else:
+            send action bar "&c♡ &f%{_player}% убил %player%" to loop-player
+          
       add 1 to {game.current::%{_player}%.kills}
       add 1 to {statistics::%{_player}%::kills}
 
@@ -210,6 +198,12 @@ on death:
   force player to respawn
   set death message to ""
 
+command setSpawn [<string>]:
+  trigger:
+    set {game.%arg-1%.spawn} to player's location
+    if {games::*} doesn't contain arg-1:
+      add arg 1 to {games::*}
+      
 on respawn:
   teleport player to {game.%{game.currentId}%.spawn}
-  equip(player)
+  lobby_equip(player)

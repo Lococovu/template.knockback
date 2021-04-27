@@ -1,0 +1,55 @@
+on region enter:
+  wait 1 tick
+  set {_world} to "%player's world%"
+
+  # Проверка
+  if {_world} contains "lobby":
+    stop
+
+  clear player's inventory 
+  lobby_equip(player)
+
+on region leave:
+  wait 1 tick
+  set {_world} to "%player's world%"
+  
+  # Проверка
+  if {_world} contains "lobby":
+    stop
+
+  # Одеваем игрока
+  clear player's inventory
+  equip(player)
+
+on inventory click:
+  if "%region at player%" contains "spawn":
+    cancel event
+
+on right click:
+  if name of player's held item contains "Голосования":
+    execute player command "/vote"
+
+  else if name of player's held item contains "Главное":
+    execute player command "/menu"
+
+  else if name of player's held item contains "Настроить":
+    execute player command "/settings items"
+
+function lobby_equip(player: player):
+  # Голосования
+  set {_vote} to player head named "&9△ &fГолосования" with lore "" 
+  add "{SkullOwner:{Id:""3e33162a-538f-49c1-a269-394288716902"",Properties:{textures:[{Value:""eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWUyOGJlYTlkMzkzNzNkMzZlZThmYTQwZWM4M2Y5YzNmY2RkOTMxNzUyMjc3NDNmOWRkMWY3ZTc4ODZiN2VlNSJ9fX0=""}]}}}" to item-nbt of {_vote}
+
+  set slot 3 of {_player} to {_vote}
+
+  # Главное меню
+  set {_menu} to player head named "&9☖ &fГлавное меню" with lore ""
+  add "{SkullOwner:{Id:""67303f01-b659-4ce5-8706-b623a16c1db2"",Properties:{textures:[{Value:""eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvY2Y3Y2RlZWZjNmQzN2ZlY2FiNjc2YzU4NGJmNjIwODMyYWFhYzg1Mzc1ZTlmY2JmZjI3MzcyNDkyZDY5ZiJ9fX0=""}]}}}" to item-nbt of {_menu}
+
+  set slot 4 of {_player} to {_menu}
+  
+  # Настоить расположение вещей
+  set {_settings} to player head named "&9✎ &fНастроить расположение вещей"
+  add "{SkullOwner:{Id:""59eee29f-13aa-468c-b96e-52d38916a1a6"",Properties:{textures:[{Value:""eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjc3MTJjYTY1NTEyODcwMWVhM2U1ZjI4ZGRkNjllNmE4ZTYzYWRmMjgwNTJjNTFiMmZkNWFkYjUzOGUxIn19fQ==""}]}}}" to item-nbt of {_settings}
+
+  set slot 5 of {_player} to {_settings}

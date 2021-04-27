@@ -3,11 +3,23 @@
 function wp_bow_cooldown(player: player):
   set {_item} to {game::item::bow}
   
+  set {_slot} to getItemSlot({_player}, "bow")
+  if {_slot} is not set:
+    stop
+
   set {_template::empty} to "◻◻◻◻◻◻◻◻◻"
   set {_template::full} to "◼◼◼◼◼◼◼◼"
 
   set {_cooldown} to 1
   while {_cooldown} <= 4:
+    if "%region at {_player}%" contains "spawn":
+      set slot {_slot} of {_player}'s inventory to air
+      set slot 9 of {_player}'s inventory to air
+
+      lobby_equip({_player})
+
+      stop
+
     set {_temp} to getTimeIcon(round(5 - {_cooldown}))
     set {_temp}'s name to "##"
     replace all "##" in {_temp}'s name with "&e%first {_cooldown} characters of {_template::full}%&7%first 5 - {_cooldown} characters of {_template::empty}%"
@@ -16,12 +28,12 @@ function wp_bow_cooldown(player: player):
       delete {temp.%{_player}%.hit}
       send title "&e➹ &fЛук" with subtitle "&c⚔" to {_player} for 2 seconds with 0 ticks fade in and 2 ticks fade out
 
-      set slot 1 of {_player}'s inventory to {_item}
+      set slot {_slot} of {_player}'s inventory to {_item}
       set slot 9 of {_player}'s inventory to arrow    
 
       stop
 
-    set slot 1 of {_player}'s inventory to {_temp} 
+    set slot {_slot} of {_player}'s inventory to {_temp} 
 
     add 0.05 to {_cooldown}
     wait 1 tick
@@ -29,7 +41,7 @@ function wp_bow_cooldown(player: player):
   #
   send title "&e➹ &fЛук" with subtitle "&e◼◼◼◼" to {_player} for 2 seconds with 0 ticks fade in and 2 ticks fade out
 
-  set slot 1 of {_player}'s inventory to {_item}
+  set slot {_slot} of {_player}'s inventory to {_item}
   set slot 9 of {_player}'s inventory to arrow
 
 # Action

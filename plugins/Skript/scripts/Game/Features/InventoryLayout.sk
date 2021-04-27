@@ -1,0 +1,59 @@
+function getInvLayout(player: player) :: string:
+  set {_current} to {player::%{_player}%::inventory::currentLayout}
+  broadcast "GET INV LAYOUT"
+  if {_current} is not set:
+    if size of {player::%{_player}%::inventory::layouts::*} > 0:
+      broadcast "CURRENT: %{_current}%"
+      set {_current} to first element of {player::%{_player}%::inventory::layouts::*}
+    else:
+      broadcast "NEW INV"
+      populateDefaultInvLayout({_player})
+
+      set {_current} to first element of {player::%{_player}%::inventory::layouts::*}
+      set {player::%{_player}%::inventory::currentLayout} to {_current}
+
+  return {_current}
+
+function getItemSlot(player: player, item: string) :: number:
+  set {_slot} to {player::%{_player}%::temp::inventoryLocation::%{_item}%}
+  return {_slot}
+
+function equip(player: player):
+  clear {_player}'s inventory
+
+  set {_id} to getInvLayout({_player})
+
+  # Берём все вещи
+  set {_items::*} to {player::%{_player}%::inventory::layout::%{_id}%::items::*}
+  if size of {_items::*} < 1:
+    populateDefaultInvLayout({_player})
+
+    set {_id} to first element of {player::%{_player}%::inventory::layouts::*}
+    set {_items::*} to {player::%{_player}%::inventory::layout::%{_id}%::items::*}
+
+  # Ну а теперь заполняем инвентарь игрока этими вещами
+  loop {_items::*}:
+    set {_temp::*} to loop-value split at "/"
+
+    set {_item} to {_temp::1}
+    set {_slot} to {_temp::2} parsed as number
+
+    set slot {_slot} of {_player}'s inventory to {game::item::%{_item}%}
+
+    # Добавляем временную переменную
+    set {player::%{_player}%::temp::inventoryLocation::%{_item}%} to {_slot}
+
+  # Добавляем стрелу
+  set slot 9 of {_player}'s inventory to arrow
+
+function populateDefaultInvLayout(player: player):
+  set {_id} to random integer between 000 and 999
+
+  # Добавляем ид предметов
+  add "stick/0" to {player::%{_player}%::inventory::layout::%{_id}%::items::*}
+  add "bow/1" to {player::%{_player}%::inventory::layout::%{_id}%::items::*}
+  add "blocks/2" to {player::%{_player}%::inventory::layout::%{_id}%::items::*}
+  add "pearl/3" to {player::%{_player}%::inventory::layout::%{_id}%::items::*}
+  add "megajump/4" to {player::%{_player}%::inventory::layout::%{_id}%::items::*}
+
+  add {_id} to {player::%{_player}%::inventory::layouts::*}

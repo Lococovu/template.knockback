@@ -1,0 +1,129 @@
+on script load:
+  set {game.1.holoLocation} to getLocation("-3.5, 89, 0.5", "1")
+  set {game.2.holoLocation} to getLocation("0.5, 46, 5.5", "2")
+  set {game.3.holoLocation} to getLocation("183.5, 50, 1221.5", "3")
+  set {game.4.holoLocation} to getLocation("-83.5, 65, 0.5", "4")
+  set {game.5.holoLocation} to getLocation("7.5, 99, 12.5", "5")
+  set {game.6.holoLocation} to getLocation("0.5, 32, -2.6", "6")
+  set {game.7.holoLocation} to getLocation("0.5, 31.5, -1.5", "7")
+
+function defaultActions_populate(player: player):
+  # Map location
+  add {game.1.holoLocation} to {_locations::*}
+  add {game.2.holoLocation} to {_locations::*}
+  add {game.3.holoLocation} to {_locations::*}
+  add {game.4.holoLocation} to {_locations::*}
+  add {game.5.holoLocation} to {_locations::*}
+  add {game.6.holoLocation} to {_locations::*}
+  add {game.7.holoLocation} to {_locations::*}
+
+  loop {_locations::*}:
+    set {_location} to location of block at loop-value
+
+    set {workers::%{_player}%::viewWorker::block::%{_location}%::type} to "hologram"
+    set {workers::%{_player}%::viewWorker::block::%{_location}%::hoverAction} to "DE_Holo_MainCreate"
+    set {workers::%{_player}%::viewWorker::block::%{_location}%::clickAction} to "DE_Holo_MainClick"
+
+function DE_Holo_MainCreate(player: player, location: location):
+  # Сначала проверяем не стоит ли тут уже какая-то голограмма
+  set {_hologram} to {hologram::%{_player}%::%{_location}%}
+
+  if {_hologram} is set:
+    if hologram {_hologram} is deleted:
+    else:
+      stop
+
+  # Давайте же сразу создадим эту голограмму и
+  # отдадим информацию о текущей голограмме обратно.
+
+  set {_pagesNumber} to 3
+
+  set {_pages::1::title} to "&9| &fСтатистика &7(##)"
+
+  # Kills
+  set {_kills} to {game.current::%{_player}%.kills}
+  if {_kills} is not set:
+    set {_kills} to 0
+
+  set {_kills::global} to {statistics::%{_player}%::kills}
+  if {_kills::global} is not set:
+    set {_kills::global} to 0
+
+  # Deaths
+  set {_deaths} to {game.current::%{_player}%::deaths}
+  if {_deaths} is not set:
+    set {_deaths} to 0
+
+  set {_deaths::global} to {statistics::%{_player}%::deaths}
+  if {_deaths::global} is not set:
+    set {_deaths::global} to 0
+
+  set {_pages::1::lines::*} to "&c⚔ &fУбийств за раунд: &c%{_kills}% шт.", "&7- всего убийств: %{_kills::global}% шт.", "&c♡ &fСмертей за раунд: &c%{_deaths}% шт.", "&7- всего смертей: %{_deaths::global}% шт.", "&f&l● &7○ &7○"
+  
+  set {_pages::2::title} to "&9| &fОбновления &7(##)"
+  set {_pages::2::lines::*} to "&7▪ &fНовые карты, Система голосований", "&f &fБагфиксы, Визуальное обновление,", "&f &fСтатистическое обновление, Добавили", "&f &fигровую валюту, и Настройки игры!", "&7○ &f&l● &7○"
+  
+  set {_pages::3::title} to "&9| &fНаши соц. сети &7(##)"
+  set {_pages::3::lines::*} to "&fМы всегда ждём Вас в наших", "&fрядах! Заходите к нам в дискорд", "&fи начинайте общаться с игроками", "&fи создателями данного проекта:", "", "&9https://discord&f.lococovu.me/", "&7○ &7○ &f&l●" 
+
+  # Maps
+  set {_hologram::location} to {game.%{game.currentId}%.holoLocation}
+  add 2.5 to y coordinate of {_hologram::location}
+
+  create new hologram with clickable lines "" at {_hologram::location} and store it in variable {_hologram}
+
+  make hologram {_hologram} invisible by default
+  reveal hologram {_hologram} to {_player}
+
+  # Ну а теперь давайте создадим небольшой воркер, который будет
+  # проверять релевантность этой голограммы.
+  set {_currentPage} to 0
+  set {_waiting} to true
+
+  while {_waiting} is true:
+    if {_player} is offline:
+      delete {hologram::%{_player}%::%{_location}%}
+      delete hologram {_hologram}
+      stop
+
+    # Обновляем текст голограммы в зависимости от
+    # текущей странички
+    if {_time} isn't set:
+      set {_time} to 10
+
+      add 1 to {_currentPage}
+      if {_currentPage} > {_pagesNumber}:
+        set {_currentPage} to 1
+
+      # Обновляем текст голограммы
+      set {_title} to {_pages::%{_currentPage}%::title}
+      replace all "##" in {_title} with "%{_time}% с."
+
+      set {_lines::*} to {_pages::%{_currentPage}%::lines::*}
+
+      set all lines of hologram {_hologram} to "", {_title}, {_lines::*}
+
+    else:
+      # Обновляем время в названии
+      if "%{_time}%" doesn't contain ".":
+        set {_title} to {_pages::%{_currentPage}%::title}
+
+        replace all "##" in {_title} with "%round({_time})% c."
+        set line 2 of hologram {_hologram} to {_title}
+
+    # Проверяем состояние текущего блока
+    if {workers::%{_player}%::viewWorker::currentBlock} isn't {_location}:
+      delete {hologram::%{_player}%::%{_location}%}
+      delete hologram {_hologram}
+      stop
+  
+    if {hologram::%{_player}%::%{_location}%} isn't {_hologram}:
+      set {hologram::%{_player}%::%{_location}%} to {_hologram}
+
+    # Время показа странички
+    if {_time} > 0:
+      reduce {_time} by 0.05
+    else:
+      delete {_time}
+
+    wait 1 tick

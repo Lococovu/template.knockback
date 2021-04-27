@@ -1,0 +1,3 @@
+command delinv:
+  trigger:
+    delete {player::%player%::inventory::layouts::*}

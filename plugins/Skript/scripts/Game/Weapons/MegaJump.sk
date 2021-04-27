@@ -8,22 +8,33 @@ on pressure plate:
 function wp_megajump_cooldown(player: player):
   set {_item} to {game::item::megajump}
 
+  set {_slot} to getItemSlot({_player}, "megajump")
+  if {_slot} is not set:
+    stop
+
   set {_template::empty} to "◻◻◻◻◻◻◻◻◻◻◻"
   set {_template::full} to "◼◼◼◼◼◼◼◼◼◼"
 
   set {_cooldown} to 1
   while {_cooldown} < 10:
+    if "%region at {_player}%" contains "spawn":
+      set slot {_slot} of {_player}'s inventory to air
+
+      lobby_equip({_player})
+
+      stop
+
     set {_temp} to getTimeIcon(round(11 - {_cooldown}))
     set {_temp}'s name to "##"
     replace all "##" in {_temp}'s name with "&e%first {_cooldown} characters of {_template::full}%&7%first 11 - {_cooldown} characters of {_template::empty}%"
 
-    set slot 4 of {_player}'s inventory to {_temp}
+    set slot {_slot} of {_player}'s inventory to {_temp}
 
     add 0.05 to {_cooldown}
     wait 1 tick
 
   send title "&e△ &fМега-прыжок" with subtitle "&e◼◼◼◼◼◼◼◼◼◼" to {_player} for 2 seconds with 0 ticks fade in and 2 ticks fade out
-  set slot 4 of {_player}'s inventory to {_item}
+  set slot {_slot} of {_player}'s inventory to {_item}
 
 # Action
 on place:

@@ -1,0 +1,29 @@
+every 1 second:
+  add 1 to {game.time}
+
+  if {game.time}/60 is 2 or 4 or 6 or 8 or 10 or 12 or 14:
+    loop all players:
+      sendNotification(loop-player, "Новая карта через &e%15 - (round({game.time}/60))% &fминут.", 6)
+
+  if {game.time} >= 900:
+    set {game.time} to 1
+    randomizeMap()
+
+    wait 1 tick
+    loop all players:
+      if {authorized::%loop-player%} is true:
+        play sound "beacon.activate" with pitch 1 at loop-player for loop-player
+        send title "&c⚔" with subtitle "&fНовый раунд, новая карта, новый бой!" to loop-player for 4 seconds with 0 ticks fade in and 2 ticks fade out
+    stop
+
+  if {game.time} >= 885:
+    if {game.time} < 895:
+      loop all players:
+        if {authorized::%loop-player%} is true:
+          play sound "block.end_portal_frame.fill" with pitch (900 - {game.time})/10 at loop-player for loop-player
+          send title "" with subtitle "&f%900 - {game.time}%" to loop-player for 2 seconds with 0 ticks fade in and 0 ticks fade out
+    else:
+      loop all players:
+        if {authorized::%loop-player%} is true:
+          play sound "block.end_portal_frame.fill" with pitch (900 - {game.time})/10 at loop-player for loop-player
+          send title "&c%getNumber(900 - {game.time})%" with subtitle "" to loop-player for 2 seconds with 0 ticks fade in and 0 ticks fade out

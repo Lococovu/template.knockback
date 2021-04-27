@@ -2,12 +2,14 @@ function PlayerEntry(player: player):
   # Настройки
   set {_player}'s gamemode to survival
   clear {_player}'s inventory
-  
-  equip({_player})
 
   # Проверяем игру
   checkGame()
   teleport {_player} to {game.%{game.currentId}%.spawn}
+
+  # ViewAction's
+  defaultActions_populate({_player})
+  StartViewWorker({_player})
 
 # checkGame
 function checkGame():
@@ -16,13 +18,18 @@ function checkGame():
 
 function randomizeMap():
   delete {game.current::*}
-  set {game.currentId} to random element of {games::*}
+
+  set {_finding} to true
+  while {_finding} is true:
+    set {_id} to random element of {games::*}
+    if {game.currentId} isn't {_id}:
+      set {game.currentId} to {_id}
+      set {_finding} to false
 
   loop all players:
     # notifications
-
-    equip(loop-player)
-    teleport loop-player to {game.%{game.currentId}%.spawn}
+    if {authorized::%loop-player%} is true:
+      teleport loop-player to {game.%{game.currentId}%.spawn}
 
 function clear(p: player):	
 	clear {_p}'s inventory
@@ -30,14 +37,60 @@ function clear(p: player):
 	heal {_p}
 	set {_p}'s hunger to 20
 
-function equip(p: player):	
-	clear({_p})
-	set slot 0 of {_p} to {game::item::stick}
-	set slot 1 of {_p} to {game::item::bow}
-	set slot 2 of {_p} to {game::item::blocks}
-	set slot 3 of {_p} to {game::item::pearl}
-	set slot 4 of {_p} to {game::item::megajump}
-	set slot 9 of {_p} to arrow
-
 function getTimeIcon(time: number) :: item:
   return {getTimeIcon::%{_time}%}
+
+function getNumber(number: number) :: string:
+  set {_string} to "%{_number}%"
+  
+  set {_number::0} to "⓪"
+  set {_number::1} to "①"
+  set {_number::2} to "②"
+  set {_number::3} to "③"
+  set {_number::4} to "④"
+  set {_number::5} to "⑤"
+  set {_number::6} to "⑥"
+  set {_number::7} to "⑦"
+  set {_number::8} to "⑧"
+  set {_number::9} to "⑨"
+
+  set {_temp::*} to {_number} split at ""
+  loop {_temp::*}:
+    replace all "%loop-value%" in {_string} with {_number::%loop-value%}
+
+  return {_string}
+
+function getUppercaseNumber(number: number) :: string:
+  set {_string} to "%{_number}%"
+  
+  set {_number::0} to "⁰"
+  set {_number::1} to "¹"
+  set {_number::2} to "²"
+  set {_number::3} to "³"
+  set {_number::4} to "⁴"
+  set {_number::5} to "⁵"
+  set {_number::6} to "⁶"
+  set {_number::7} to "⁷"
+  set {_number::8} to "⁸"
+  set {_number::9} to "⁹"
+
+  set {_temp::*} to {_number} split at ""
+  loop {_temp::*}:
+    replace all "%loop-value%" in {_string} with {_number::%loop-value%}
+
+  return {_string}
+
+function visualizeTime(time: string) :: string:
+  set {_string} to {_time}
+  replace all " and " in {_string} with " "
+
+  set {_temp::*} to {_string} split at " "
+  loop {_temp::*}:
+    if loop-value contains ".":
+      set {_t::*} to loop-value split at "."
+      replace all ".%{_t::2}%" in {_string} with ""
+
+  replace all "minutes", "minute" in {_string} with "м"
+  replace all "seconds", "second" in {_string} with "с"
+
+  return {_string}
