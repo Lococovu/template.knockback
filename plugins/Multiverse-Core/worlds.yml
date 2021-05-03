@@ -93,10 +93,10 @@ worlds:
     generator: 'null'
     playerLimit: '-1'
     allowFlight: 'true'
-  '3':
+  world:
     ==: MVWorld
     hidden: 'false'
-    alias: '3'
+    alias: world
     color: WHITE
     style: NORMAL
     pvp: 'true'
@@ -124,19 +124,19 @@ worlds:
     adjustSpawn: 'false'
     portalForm: ALL
     gameMode: SURVIVAL
-    keepSpawnInMemory: 'true'
+    keepSpawnInMemory: 'false'
     spawnLocation:
       ==: MVSpawnLocation
-      x: 183.489314163366
-      y: 50.0
-      z: 1218.3339149796411
-      pitch: 90.0
-      yaw: 319.35007
-    autoLoad: 'true'
+      x: 0.0
+      y: 64.0
+      z: -224.0
+      pitch: 0.0
+      yaw: 0.0
+    autoLoad: 'false'
     bedRespawn: 'false'
     worldBlacklist: []
     environment: NORMAL
-    seed: '-6783434382471643986'
+    seed: '-4595544926004467294'
     generator: 'null'
     playerLimit: '-1'
     allowFlight: 'false'
@@ -187,10 +187,10 @@ worlds:
     generator: 'null'
     playerLimit: '-1'
     allowFlight: 'false'
-  world:
+  '3':
     ==: MVWorld
     hidden: 'false'
-    alias: world
+    alias: '3'
     color: WHITE
     style: NORMAL
     pvp: 'true'
@@ -218,19 +218,19 @@ worlds:
     adjustSpawn: 'false'
     portalForm: ALL
     gameMode: SURVIVAL
-    keepSpawnInMemory: 'false'
+    keepSpawnInMemory: 'true'
     spawnLocation:
       ==: MVSpawnLocation
-      x: 0.0
-      y: 64.0
-      z: -224.0
-      pitch: 0.0
-      yaw: 0.0
-    autoLoad: 'false'
+      x: 183.489314163366
+      y: 50.0
+      z: 1218.3339149796411
+      pitch: 90.0
+      yaw: 319.35007
+    autoLoad: 'true'
     bedRespawn: 'false'
     worldBlacklist: []
     environment: NORMAL
-    seed: '-4595544926004467294'
+    seed: '-6783434382471643986'
     generator: 'null'
     playerLimit: '-1'
     allowFlight: 'false'
@@ -277,7 +277,7 @@ worlds:
     bedRespawn: 'true'
     worldBlacklist: []
     environment: NORMAL
-    seed: '0'
+    seed: '-183528697681480025'
     generator: 'null'
     playerLimit: '-1'
     allowFlight: 'true'

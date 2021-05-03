@@ -1,12 +1,9 @@
 function getInvLayout(player: player) :: string:
   set {_current} to {player::%{_player}%::inventory::currentLayout}
-  broadcast "GET INV LAYOUT"
   if {_current} is not set:
     if size of {player::%{_player}%::inventory::layouts::*} > 0:
-      broadcast "CURRENT: %{_current}%"
       set {_current} to first element of {player::%{_player}%::inventory::layouts::*}
     else:
-      broadcast "NEW INV"
       populateDefaultInvLayout({_player})
 
       set {_current} to first element of {player::%{_player}%::inventory::layouts::*}
