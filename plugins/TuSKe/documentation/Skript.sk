@@ -19,8 +19,8 @@ Events:
 			[on] [skellett] ([item] anvil prepare|prepare [item] anvil)
 		Event values:
 			event-number
-			event-string
 			event-itemstack
+			event-string
 		Cancellable: false
 	On ([un]hang[ing]|[un]hung) [entity] (remove|break|destroy|damage):
 		ID: ([un]hang[ing]|[un]hung)_[entity]_(remove|break|destroy|damage)
@@ -28,8 +28,8 @@ Events:
 			[on] [skellett] ([un]hang[ing]|[un]hung) [entity] (remove|break|destroy|damage)
 		Event values:
 			event-entity
-			event-entity
 			event-location
+			event-entity
 			event-world
 			future event-entity
 		Cancellable: true
@@ -49,10 +49,10 @@ Events:
 			[on] [skellett] (hang|[entity] hung)
 		Event values:
 			event-entity
-			event-entity
-			event-player
 			event-location
 			event-block
+			event-entity
+			event-player
 			event-world
 		Cancellable: true
 	On (hotbar|held [(item|slot)]|inventory slot) (switch|change):
@@ -69,10 +69,10 @@ Events:
 			[on] [skellett] (multi[ple]|double)[ ][block][ ]place
 		Event values:
 			past event-block
-			event-player
 			event-location
-			event-direction
 			event-block
+			event-player
+			event-direction
 			event-world
 		Cancellable: true
 	On (unhang|[entity] unhung):
@@ -81,8 +81,8 @@ Events:
 			[on] [skellett] (unhang|[entity] unhung)
 		Event values:
 			event-entity
-			event-entity
 			event-location
+			event-entity
 			event-world
 			future event-entity
 		Cancellable: true
@@ -112,8 +112,8 @@ Events:
 			[on] anvil damage
 		Event values:
 			event-inventory
-			event-player
 			event-block
+			event-player
 		Cancellable: true
 	On AoE Cloud Effect:
 		ID: aoe_cloud_effect
@@ -126,11 +126,11 @@ Events:
 		Patterns:
 			[on] (area|AoE) [cloud] effect
 		Event values:
-			event-entity
-			event-potioneffecttype
 			event-location
-			event-commandsender
+			event-potioneffecttype
+			event-entity
 			event-world
+			event-commandsender
 		Cancellable: true
 	On Arm Swing:
 		ID: arm_swing
@@ -159,8 +159,8 @@ Events:
 		Patterns:
 			[on] [player] armor change[d]
 		Event values:
-			event-player
 			event-itemtype
+			event-player
 			event-world
 		Cancellable: false
 	On Armor Change Event:
@@ -175,8 +175,8 @@ Events:
 		Patterns:
 			[on] player change armor
 		Event values:
-			event-player
 			event-itemtype
+			event-player
 			event-world
 		Cancellable: false
 	On Beacon Effect:
@@ -192,11 +192,11 @@ Events:
 		Patterns:
 			[on] beacon effect
 		Event values:
-			event-potioneffect
-			event-player
-			event-potioneffecttype
 			event-location
+			event-potioneffect
 			event-block
+			event-potioneffecttype
+			event-player
 			event-world
 		Cancellable: true
 	On Bed Enter:
@@ -211,8 +211,8 @@ Events:
 			[on] bed enter[ing]
 			[on] [player] enter[ing] [a] bed
 		Event values:
-			event-player
 			event-block
+			event-player
 			event-world
 		Cancellable: true
 	On Bed Leave:
@@ -227,8 +227,8 @@ Events:
 			[on] bed leav(e|ing)
 			[on] [player] leav(e|ing) [a] bed
 		Event values:
-			event-player
 			event-block
+			event-player
 			event-world
 		Cancellable: true
 	On Block Damage:
@@ -244,9 +244,9 @@ Events:
 		Patterns:
 			[on] block damag(ing|e)
 		Event values:
-			event-player
 			event-location
 			event-block
+			event-player
 			event-world
 		Cancellable: true
 	On Block Fertilize:
@@ -261,9 +261,9 @@ Events:
 		Patterns:
 			[on] [block] fertilize
 		Event values:
-			event-player
 			event-location
 			event-block
+			event-player
 			event-world
 		Cancellable: true
 	On Block Growth:
@@ -295,11 +295,11 @@ Events:
 		Patterns:
 			[on] block (interact|trample)
 		Event values:
-			event-entity
 			event-location
-			event-commandsender
 			event-block
+			event-entity
 			event-world
+			event-commandsender
 		Cancellable: true
 	On Book Edit:
 		ID: book_edit
@@ -312,8 +312,8 @@ Events:
 		Patterns:
 			[on] book (edit|change|write)
 		Event values:
-			event-player
 			event-itemtype
+			event-player
 			event-world
 		Cancellable: true
 	On Book Editing:
@@ -321,8 +321,8 @@ Events:
 		Patterns:
 			[on] [book] edit
 		Event values:
-			event-player
 			event-itemtype
+			event-player
 			event-world
 		Cancellable: true
 	On Book Sign:
@@ -336,8 +336,8 @@ Events:
 		Patterns:
 			[on] book sign[ing]
 		Event values:
-			event-player
 			event-itemtype
+			event-player
 			event-world
 		Cancellable: true
 	On Bound - Enter:
@@ -353,8 +353,8 @@ Events:
 		Patterns:
 			[on] bound enter
 		Event values:
-			event-player
 			event-bound
+			event-player
 		Cancellable: true
 	On Bound - Exit:
 		ID: bound_-_exit
@@ -370,8 +370,8 @@ Events:
 		Patterns:
 			[on] bound exit
 		Event values:
-			event-player
 			event-bound
+			event-player
 		Cancellable: true
 	On Break / Mine:
 		ID: break_mine
@@ -388,13 +388,13 @@ Events:
 		Event values:
 			past event-block
 			event-entity
-			event-entity
-			event-player
 			event-location
 			event-block
+			event-entity
+			event-player
 			event-world
-			future event-entity
 			future event-block
+			future event-entity
 		Cancellable: true
 	On Bucket Empty:
 		ID: bucket_empty
@@ -409,8 +409,8 @@ Events:
 			[on] [player] empty[ing] [a] bucket
 		Event values:
 			past event-block
-			event-player
 			event-block
+			event-player
 			event-world
 		Cancellable: true
 	On Bucket fill:
@@ -425,8 +425,8 @@ Events:
 			[on] bucket fill[ing]
 			[on] [player] fill[ing] [a] bucket
 		Event values:
-			event-player
 			event-block
+			event-player
 			event-world
 			future event-block
 		Cancellable: true
@@ -460,9 +460,9 @@ Events:
 			[on] [block] can build check
 		Event values:
 			past event-block
-			event-player
 			event-location
 			event-block
+			event-player
 			event-world
 		Cancellable: false
 	On Chat:
@@ -544,11 +544,11 @@ Events:
 			[on] [(right|left)(| |-)][mouse(| |-)]click[ing] [on %-entitydata/itemtype%] [(with|using|holding) %itemtype%]
 			[on] [(right|left)(| |-)][mouse(| |-)]click[ing] (with|using|holding) %itemtype% on %entitydata/itemtype%
 		Event values:
+			event-itemtype
+			event-block
 			event-entity
 			event-player
-			event-itemtype
 			event-direction
-			event-block
 			event-world
 		Cancellable: true
 	On Close Inventory:
@@ -570,10 +570,10 @@ Events:
 		Patterns:
 			[on] combust[ing]
 		Event values:
-			event-entity
 			event-location
-			event-commandsender
+			event-entity
 			event-world
+			event-commandsender
 		Cancellable: true
 	On Command:
 		ID: command
@@ -589,8 +589,8 @@ Events:
 			[on] command [%-string%]
 		Event values:
 			event-player
-			event-commandsender
 			event-world
+			event-commandsender
 		Cancellable: true
 	On Connect:
 		ID: connect
@@ -620,8 +620,8 @@ Events:
 		Patterns:
 			[on] [player] ((eat|drink)[ing]|consum(e|ing)) [[of] %itemtypes%]
 		Event values:
-			event-player
 			event-itemtype
+			event-player
 			event-world
 		Cancellable: true
 	On Craft:
@@ -635,14 +635,14 @@ Events:
 		Patterns:
 			[on] [player] craft[ing] [[of] %itemtypes%]
 		Event values:
-			event-inventoryaction
 			event-recipe
+			event-slot
+			event-itemstack
+			event-itemtype
+			event-inventoryaction
+			event-clicktype
 			event-inventory
 			event-player
-			event-slot
-			event-itemtype
-			event-clicktype
-			event-itemstack
 			event-world
 		Cancellable: true
 	On Creeper Power:
@@ -656,10 +656,10 @@ Events:
 		Patterns:
 			[on] creeper power
 		Event values:
-			event-entity
 			event-location
-			event-commandsender
+			event-entity
 			event-world
+			event-commandsender
 		Cancellable: true
 	On Damage:
 		ID: damage
@@ -673,12 +673,12 @@ Events:
 		Patterns:
 			[on] damag(e|ing) [of %entitydata%]
 		Event values:
-			event-projectile
-			event-entity
 			event-damagecause
 			event-location
-			event-commandsender
+			event-entity
+			event-projectile
 			event-world
+			event-commandsender
 		Cancellable: true
 	On Death:
 		ID: death
@@ -694,12 +694,12 @@ Events:
 		Patterns:
 			[on] death [of %entitydatas%]
 		Event values:
-			event-projectile
-			event-entity
 			event-damagecause
 			event-location
-			event-commandsender
+			event-entity
+			event-projectile
 			event-world
+			event-commandsender
 		Cancellable: true
 	On Dispense:
 		ID: dispense
@@ -729,9 +729,9 @@ Events:
 		Patterns:
 			[on] [player] drop[ing] [[of] %itemtypes%]
 		Event values:
-			event-player
 			event-itementity
 			event-itemtype
+			event-player
 			event-world
 		Cancellable: true
 	On Enchant:
@@ -748,20 +748,20 @@ Events:
 		Patterns:
 			[on] [item] enchant
 		Event values:
-			event-player
-			event-itemtype
 			event-itemstack
+			event-itemtype
 			event-block
+			event-player
 		Cancellable: true
 	On Enchant:
 		ID: enchant
 		Patterns:
 			[on] enchant
 		Event values:
-			event-player
-			event-itemtype
 			event-itemstack
+			event-itemtype
 			event-block
+			event-player
 		Cancellable: true
 	On Enchant Prepare:
 		ID: enchant_prepare
@@ -778,10 +778,10 @@ Events:
 			[on] [item] enchant prepare
 		Event values:
 			event-number
-			event-player
-			event-itemtype
 			event-itemstack
+			event-itemtype
 			event-block
+			event-player
 		Cancellable: true
 	On Enderman/Sheep/Silverfish/Falling Block:
 		ID: endermansheepsilverfishfalling_block
@@ -805,12 +805,12 @@ Events:
 			[on] silverfish exit
 			[on] falling block land[ing]
 		Event values:
-			event-entity
 			event-location
 			event-itemstack
-			event-commandsender
 			event-block
+			event-entity
 			event-world
+			event-commandsender
 		Cancellable: true
 	On Entity Dismount:
 		ID: entity_dismount
@@ -824,10 +824,10 @@ Events:
 		Patterns:
 			[on] dismount[ing]
 		Event values:
-			event-entity
 			event-location
-			event-commandsender
+			event-entity
 			event-world
+			event-commandsender
 		Cancellable: true
 	On Entity Knockback:
 		ID: entity_knockback
@@ -842,10 +842,10 @@ Events:
 		Patterns:
 			[on] entity knockback
 		Event values:
-			event-entity
 			event-location
-			event-commandsender
+			event-entity
 			event-world
+			event-commandsender
 		Cancellable: true
 	On Entity Mount:
 		ID: entity_mount
@@ -859,10 +859,10 @@ Events:
 		Patterns:
 			[on] mount[ing]
 		Event values:
-			event-entity
 			event-location
-			event-commandsender
+			event-entity
 			event-world
+			event-commandsender
 		Cancellable: true
 	On Entity Pathfind Event:
 		ID: entity_pathfind_event
@@ -877,10 +877,10 @@ Events:
 		Patterns:
 			[on] entity start[s] pathfinding
 		Event values:
-			event-entity
 			event-location
-			event-commandsender
+			event-entity
 			event-world
+			event-commandsender
 		Cancellable: true
 	On Entity Portal:
 		ID: entity_portal
@@ -894,10 +894,10 @@ Events:
 		Patterns:
 			[on] entity portal
 		Event values:
-			event-entity
 			event-location
-			event-commandsender
+			event-entity
 			event-world
+			event-commandsender
 			future event-location
 		Cancellable: true
 	On Entity Zap:
@@ -913,10 +913,10 @@ Events:
 		Patterns:
 			[on] entity (zap|struck by lightning)
 		Event values:
-			event-entity
 			event-location
-			event-commandsender
+			event-entity
 			event-world
+			event-commandsender
 		Cancellable: true
 	On Experience Orb Merge:
 		ID: experience_orb_merge
@@ -930,10 +930,10 @@ Events:
 		Patterns:
 			[on] (experience|[e]xp) orb merge
 		Event values:
-			event-entity
 			event-location
-			event-commandsender
+			event-entity
 			event-world
+			event-commandsender
 		Cancellable: true
 	On Experience Spawn:
 		ID: experience_spawn
@@ -950,8 +950,8 @@ Events:
 			[on] [e]xp[erience] [orb] spawn
 			[on] spawn of [a[n]] [e]xp[erience] [orb]
 		Event values:
-			event-experience
 			event-location
+			event-experience
 		Cancellable: true
 	On Explode:
 		ID: explode
@@ -964,10 +964,10 @@ Events:
 		Patterns:
 			[on] explo(d(e|ing)|sion)
 		Event values:
-			event-entity
 			event-location
-			event-commandsender
+			event-entity
 			event-world
+			event-commandsender
 		Cancellable: true
 	On Explosion Prime:
 		ID: explosion_prime
@@ -980,10 +980,10 @@ Events:
 		Patterns:
 			[on] explosion prime
 		Event values:
-			event-entity
 			event-location
-			event-commandsender
+			event-entity
 			event-world
+			event-commandsender
 		Cancellable: true
 	On Fade:
 		ID: fade
@@ -1016,12 +1016,12 @@ Events:
 		Patterns:
 			[on] [a] firework explo(d(e|ing)|sion) [colo[u]red %-colors%]
 		Event values:
+			event-location
+			event-projectile
 			event-entity
 			event-fireworkeffect
-			event-location
-			event-commandsender
-			event-projectile
 			event-world
+			event-commandsender
 		Cancellable: true
 	On First Join:
 		ID: first_join
@@ -1149,9 +1149,9 @@ Events:
 		Patterns:
 			[on] any move[ment]
 		Event values:
-			event-teleportcause
-			event-player
 			event-block
+			event-player
+			event-teleportcause
 			event-world
 		Cancellable: true
 	On Gliding State Change:
@@ -1166,10 +1166,10 @@ Events:
 		Patterns:
 			[on] (gliding state change|toggl(e|ing) gliding)
 		Event values:
-			event-entity
 			event-location
-			event-commandsender
+			event-entity
 			event-world
+			event-commandsender
 		Cancellable: true
 	On Grow:
 		ID: grow
@@ -1208,8 +1208,8 @@ Events:
 		Patterns:
 			[on] swap[ping of] [(hand|held)] item[s]
 		Event values:
-			event-player
 			event-itemstack
+			event-player
 			event-world
 		Cancellable: true
 	On Heal:
@@ -1223,10 +1223,10 @@ Events:
 		Patterns:
 			[on] heal[ing]
 		Event values:
-			event-entity
 			event-location
-			event-commandsender
+			event-entity
 			event-world
+			event-commandsender
 		Cancellable: true
 	On Horse Jump:
 		ID: horse_jump
@@ -1240,20 +1240,20 @@ Events:
 		Patterns:
 			[on] horse jump
 		Event values:
-			event-entity
 			event-location
-			event-commandsender
+			event-entity
 			event-world
+			event-commandsender
 		Cancellable: true
 	On Horse Jump:
 		ID: horse_jump
 		Patterns:
 			[on] horse jump
 		Event values:
-			event-entity
 			event-location
-			event-commandsender
+			event-entity
 			event-world
+			event-commandsender
 		Cancellable: true
 	On Hunger Meter Change:
 		ID: hunger_meter_change
@@ -1266,10 +1266,10 @@ Events:
 		Patterns:
 			[on] (food|hunger) (level|met(er|re)|bar) chang(e|ing)
 		Event values:
-			event-entity
 			event-location
-			event-commandsender
+			event-entity
 			event-world
+			event-commandsender
 		Cancellable: true
 	On Ignition:
 		ID: ignition
@@ -1285,9 +1285,9 @@ Events:
 		Patterns:
 			[on] [block] ignit(e|ion)
 		Event values:
-			event-player
 			event-location
 			event-block
+			event-player
 			event-world
 		Cancellable: true
 	On Inventory Click:
@@ -1304,14 +1304,14 @@ Events:
 		Patterns:
 			[on] [player] inventory(-| )click[ing] [[at] %itemtypes%]
 		Event values:
-			event-inventoryaction
 			event-recipe
-			event-inventory
-			event-player
 			event-slot
 			event-itemstack
 			event-itemtype
+			event-inventoryaction
 			event-clicktype
+			event-inventory
+			event-player
 			event-world
 		Cancellable: true
 	On Inventory Click:
@@ -1319,14 +1319,14 @@ Events:
 		Patterns:
 			[on] inventory click
 		Event values:
-			event-inventoryaction
 			event-recipe
-			event-inventory
-			event-player
 			event-slot
 			event-itemstack
 			event-itemtype
+			event-inventoryaction
 			event-clicktype
+			event-inventory
+			event-player
 			event-world
 		Cancellable: true
 	On Inventory Close:
@@ -1371,9 +1371,9 @@ Events:
 		Patterns:
 			[on] inventory pick[ ]up
 		Event values:
-			event-inventory
 			event-itementity
 			event-itemtype
+			event-inventory
 		Cancellable: true
 	On Item Break:
 		ID: item_break
@@ -1388,8 +1388,8 @@ Events:
 			[on] [player] tool break[ing]
 			[on] [player] break[ing] (a|the|) tool
 		Event values:
-			event-player
 			event-itemtype
+			event-player
 			event-world
 		Cancellable: false
 	On Item Damage:
@@ -1404,9 +1404,9 @@ Events:
 		Patterns:
 			[on] item damag(e|ing)
 		Event values:
-			event-player
-			event-itemtype
 			event-itemstack
+			event-itemtype
+			event-player
 			event-world
 		Cancellable: true
 	On Item Despawn:
@@ -1423,12 +1423,12 @@ Events:
 			[on] (item[ ][stack]|[item] %-itemtypes%) despawn[ing]
 			[on] [item[ ][stack]] despawn[ing] [[of] %-itemtypes%]
 		Event values:
-			event-entity
 			event-location
 			event-itementity
 			event-itemtype
-			event-commandsender
+			event-entity
 			event-world
+			event-commandsender
 		Cancellable: true
 	On Item Mend:
 		ID: item_mend
@@ -1444,9 +1444,9 @@ Events:
 		Patterns:
 			[on] item mend[ing]
 		Event values:
+			event-itemtype
 			event-entity
 			event-player
-			event-itemtype
 			event-world
 		Cancellable: true
 	On Item Merge:
@@ -1462,12 +1462,12 @@ Events:
 			[on] (item[ ][stack]|[item] %-itemtypes%) merg(e|ing)
 			[on] item[ ][stack] merg(e|ing) [[of] %-itemtypes%]
 		Event values:
-			event-entity
 			event-location
 			event-itementity
 			event-itemtype
-			event-commandsender
+			event-entity
 			event-world
+			event-commandsender
 			future event-itementity
 		Cancellable: true
 	On Item Projectile Hit:
@@ -1475,9 +1475,9 @@ Events:
 		Patterns:
 			[on] item [projectile] hit
 		Event values:
-			event-livingentity
 			event-location
 			event-itemstack
+			event-livingentity
 		Cancellable: false
 	On Item Spawn:
 		ID: item_spawn
@@ -1491,11 +1491,11 @@ Events:
 		Patterns:
 			[on] item spawn[ing] [[of] %itemtypes%]
 		Event values:
-			event-entity
 			event-location
 			event-itemtype
-			event-commandsender
+			event-entity
 			event-world
+			event-commandsender
 		Cancellable: true
 	On Join:
 		ID: join
@@ -1618,9 +1618,9 @@ Events:
 		Patterns:
 			[on] (step|walk)[ing] (on|over) %*itemtypes%
 		Event values:
-			event-teleportcause
-			event-player
 			event-block
+			event-player
+			event-teleportcause
 			event-world
 		Cancellable: true
 	On Physics:
@@ -1653,13 +1653,13 @@ Events:
 		Patterns:
 			[on] [(player|entity)] (pick[ ]up|picking up) [[of] %itemtypes%]
 		Event values:
-			event-entity
-			event-player
 			event-location
 			event-itementity
 			event-itemtype
-			event-commandsender
+			event-entity
+			event-player
 			event-world
+			event-commandsender
 		Cancellable: true
 	On Pig Zap:
 		ID: pig_zap
@@ -1672,10 +1672,10 @@ Events:
 		Patterns:
 			[on] pig[ ]zap
 		Event values:
-			event-entity
 			event-location
-			event-commandsender
+			event-entity
 			event-world
+			event-commandsender
 		Cancellable: true
 	On Piston Extend:
 		ID: piston_extend
@@ -1723,11 +1723,11 @@ Events:
 		Event values:
 			past event-block
 			event-entity
+			event-location
+			event-block
 			event-entity
 			event-player
-			event-location
 			event-direction
-			event-block
 			event-world
 		Cancellable: true
 	On Player Elytra Boost:
@@ -1742,8 +1742,8 @@ Events:
 		Patterns:
 			[on] [player] elytra boost
 		Event values:
-			event-player
 			event-itemtype
+			event-player
 			event-world
 		Cancellable: true
 	On Player Pickup Experience Orb:
@@ -1788,9 +1788,9 @@ Events:
 		Patterns:
 			[on] [player] portal
 		Event values:
-			event-teleportcause
-			event-player
 			event-block
+			event-player
+			event-teleportcause
 			event-world
 		Cancellable: true
 	On Portal Create:
@@ -1821,10 +1821,10 @@ Events:
 			[on] portal enter[ing]
 			[on] entering [a] portal
 		Event values:
-			event-entity
 			event-location
-			event-commandsender
+			event-entity
 			event-world
+			event-commandsender
 		Cancellable: false
 	On Prepare Craft:
 		ID: prepare_craft
@@ -1837,11 +1837,11 @@ Events:
 		Patterns:
 			[on] [player] (preparing|beginning) craft[ing] [[of] %itemtypes%]
 		Event values:
-			event-inventory
 			event-recipe
-			event-player
 			event-slot
 			event-itemstack
+			event-inventory
+			event-player
 		Cancellable: false
 	On Pressure Plate / Trip:
 		ID: pressure_plate_trip
@@ -1855,10 +1855,10 @@ Events:
 			[on] [step[ping] on] [a] [pressure] plate
 			[on] (trip|[step[ping] on] [a] tripwire)
 		Event values:
-			event-player
 			event-itemtype
-			event-direction
 			event-block
+			event-player
+			event-direction
 			event-world
 		Cancellable: true
 	On Projectile Collide:
@@ -1873,11 +1873,11 @@ Events:
 		Patterns:
 			[on] projectile collide
 		Event values:
-			event-projectile
-			event-entity
 			event-location
-			event-commandsender
+			event-entity
+			event-projectile
 			event-world
+			event-commandsender
 		Cancellable: true
 	On Projectile Hit:
 		ID: projectile_hit
@@ -1894,13 +1894,13 @@ Events:
 		Patterns:
 			[on] projectile hit
 		Event values:
-			event-projectile
-			event-entity
 			event-location
-			event-direction
-			event-commandsender
 			event-block
+			event-entity
+			event-direction
+			event-projectile
 			event-world
+			event-commandsender
 		Cancellable: true
 	On Quit:
 		ID: quit
@@ -2025,10 +2025,10 @@ Events:
 		Patterns:
 			[on] [entity] resurrect[ion] [attempt]
 		Event values:
-			event-entity
 			event-location
-			event-commandsender
+			event-entity
 			event-world
+			event-commandsender
 		Cancellable: true
 	On Riptide:
 		ID: riptide
@@ -2043,8 +2043,8 @@ Events:
 		Patterns:
 			[on] [use of] riptide [enchant[ment]]
 		Event values:
-			event-player
 			event-itemtype
+			event-player
 			event-world
 		Cancellable: false
 	On Script Load/Unload:
@@ -2120,10 +2120,10 @@ Events:
 		Patterns:
 			[on] sheep dye
 		Event values:
-			event-entity
 			event-location
-			event-commandsender
+			event-entity
 			event-world
+			event-commandsender
 		Cancellable: true
 	On Sheep Regrow Wool:
 		ID: sheep_regrow_wool
@@ -2137,10 +2137,10 @@ Events:
 		Patterns:
 			[on] sheep [re]grow[ing] wool
 		Event values:
-			event-entity
 			event-location
-			event-commandsender
+			event-entity
 			event-world
+			event-commandsender
 		Cancellable: true
 	On Shoot:
 		ID: shoot
@@ -2155,11 +2155,11 @@ Events:
 		Patterns:
 			[on] [projectile] shoot
 		Event values:
-			event-projectile
-			event-entity
 			event-location
-			event-commandsender
+			event-entity
+			event-projectile
 			event-world
+			event-commandsender
 		Cancellable: true
 	On Sign Change:
 		ID: sign_change
@@ -2175,9 +2175,9 @@ Events:
 			[on] sign (chang[e]|edit)[ing]
 			[on] [player] (chang[e]|edit)[ing] [a] sign
 		Event values:
-			event-player
 			event-location
 			event-block
+			event-player
 			event-world
 		Cancellable: true
 	On Skeleton Horse Trap Event:
@@ -2194,10 +2194,10 @@ Events:
 		Patterns:
 			[on] skeleton horse trap
 		Event values:
-			event-entity
 			event-location
-			event-commandsender
+			event-entity
 			event-world
+			event-commandsender
 		Cancellable: true
 	On Slime Split:
 		ID: slime_split
@@ -2210,10 +2210,10 @@ Events:
 		Patterns:
 			[on] slime split[ting]
 		Event values:
-			event-entity
 			event-location
-			event-commandsender
+			event-entity
 			event-world
+			event-commandsender
 		Cancellable: true
 	On Smelt:
 		ID: smelt
@@ -2262,14 +2262,14 @@ Events:
 		Patterns:
 			[on] spawn[ing] [of %entitydatas%]
 		Event values:
-			event-projectile
-			event-entity
 			event-location
 			event-itemtype
-			event-spawnreason
-			event-commandsender
 			event-block
+			event-spawnreason
+			event-entity
+			event-projectile
 			event-world
+			event-commandsender
 		Cancellable: true
 	On Spawn Change:
 		ID: spawn_change
@@ -2349,10 +2349,10 @@ Events:
 			[on] [entity] toggl(e|ing) swim
 			[on] [entity] swim toggl(e|ing)
 		Event values:
-			event-entity
 			event-location
-			event-commandsender
+			event-entity
 			event-world
+			event-commandsender
 		Cancellable: true
 	On Tame:
 		ID: tame
@@ -2365,10 +2365,10 @@ Events:
 		Patterns:
 			[on] [entity] tam(e|ing)
 		Event values:
-			event-entity
 			event-location
-			event-commandsender
+			event-entity
 			event-world
+			event-commandsender
 		Cancellable: true
 	On Target:
 		ID: target
@@ -2383,10 +2383,10 @@ Events:
 			[on] [entity] target
 			[on] [entity] un[-]target
 		Event values:
-			event-entity
 			event-location
-			event-commandsender
+			event-entity
 			event-world
+			event-commandsender
 		Cancellable: true
 	On Teleport:
 		ID: teleport
@@ -2399,9 +2399,9 @@ Events:
 		Patterns:
 			[on] [player] teleport[ing]
 		Event values:
-			event-teleportcause
-			event-player
 			event-block
+			event-player
+			event-teleportcause
 			event-world
 		Cancellable: true
 	On Throwing of an Egg:
@@ -2438,9 +2438,9 @@ Events:
 		Patterns:
 			[on] vehicle (block collide|collide with block)
 		Event values:
-			event-entity
-			event-entity
 			event-block
+			event-entity
+			event-entity
 			event-world
 		Cancellable: false
 	On Vehicle Collide With Entity:
@@ -2448,9 +2448,9 @@ Events:
 		Patterns:
 			[on] vehicle (entity collide|collide with entity)
 		Event values:
-			event-entity
-			event-entity
 			event-block
+			event-entity
+			event-entity
 			event-world
 		Cancellable: false
 	On Vehicle Create:
@@ -2534,9 +2534,9 @@ Events:
 			[on] vehicle exit
 			[on] exit[ing] [a] vehicle
 		Event values:
-			event-entity
-			event-entity
 			event-livingentity
+			event-entity
+			event-entity
 			event-world
 		Cancellable: true
 	On Weather Change:
@@ -2620,43 +2620,43 @@ Events:
 		Patterns:
 			[on] zombie break[ing] [a] [wood[en]] door
 		Event values:
-			event-entity
 			event-location
 			event-itemstack
-			event-commandsender
 			event-block
+			event-entity
 			event-world
+			event-commandsender
 		Cancellable: true
 	On [entity] (elytra|glide) [toggle]:
 		ID: [entity]_(elytra|glide)_[toggle]
 		Patterns:
 			[on] [skellett] [entity] (elytra|glide) [toggle]
 		Event values:
-			event-entity
 			event-location
-			event-commandsender
+			event-entity
 			event-world
+			event-commandsender
 		Cancellable: true
 	On [entity] (resurrect|revive):
 		ID: [entity]_(resurrect|revive)
 		Patterns:
 			[on] [skellett] [entity] (resurrect|revive)
 		Event values:
-			event-entity
 			event-location
-			event-commandsender
+			event-entity
 			event-world
+			event-commandsender
 		Cancellable: true
 	On [entity] (un(leash|lead)|(leash|lead) break):
 		ID: [entity]_(un(leash|lead)|(leash|lead)_break)
 		Patterns:
 			[on] [skellett] [entity] (un(leash|lead)|(leash|lead) break)
 		Event values:
-			event-entity
 			event-location
-			event-commandsender
 			event-block
+			event-entity
 			event-world
+			event-commandsender
 		Cancellable: false
 	On [on] ([item] enchant prepare|prepare [item] enchant)::
 		ID: [on]_([item]_enchant_prepare|prepare_[item]_enchant):
@@ -2664,10 +2664,10 @@ Events:
 			[on] [on] ([item] enchant prepare|prepare [item] enchant)
 		Event values:
 			event-number
-			event-player
-			event-itemtype
 			event-itemstack
+			event-itemtype
 			event-block
+			event-player
 		Cancellable: true
 	On [on] [player] map [(initialize|open)]::
 		ID: [on]_[player]_map_[(initialize|open)]:
@@ -2691,10 +2691,10 @@ Events:
 		Patterns:
 			[on] [on] entity sho[o]t
 		Event values:
-			event-entity
 			event-location
-			event-commandsender
+			event-entity
 			event-world
+			event-commandsender
 		Cancellable: true
 	On [player] world change:
 		ID: [player]_world_change
@@ -2710,9 +2710,9 @@ Events:
 			[on] [skellett] block [break] (xp|exp|experience) [drop]
 		Event values:
 			past event-block
-			event-player
 			event-location
 			event-block
+			event-player
 			event-world
 			future event-block
 		Cancellable: false
@@ -2721,10 +2721,10 @@ Events:
 		Patterns:
 			[on] [skellett] bre[e]d[ing]
 		Event values:
-			event-entity
 			event-location
-			event-commandsender
+			event-entity
 			event-world
+			event-commandsender
 		Cancellable: true
 	On brew[ing] [stand] fuel [increase]:
 		ID: brew[ing]_[stand]_fuel_[increase]
@@ -2742,13 +2742,13 @@ Events:
 		Patterns:
 			[on] [skellett] creative inventory click
 		Event values:
-			event-inventoryaction
-			event-inventory
-			event-player
 			event-slot
 			event-itemstack
 			event-itemtype
+			event-inventoryaction
 			event-clicktype
+			event-inventory
+			event-player
 			event-world
 		Cancellable: true
 	On entity block (change|modify):
@@ -2756,22 +2756,22 @@ Events:
 		Patterns:
 			[on] [skellett] entity block (change|modify)
 		Event values:
-			event-entity
 			event-location
 			event-itemstack
-			event-commandsender
 			event-block
+			event-entity
 			event-world
+			event-commandsender
 		Cancellable: true
 	On entity teleport:
 		ID: entity_teleport
 		Patterns:
 			[on] [skellett] entity teleport
 		Event values:
-			event-entity
 			event-location
-			event-commandsender
+			event-entity
 			event-world
+			event-commandsender
 			future event-location
 		Cancellable: true
 	On entity teleport:
@@ -2779,10 +2779,10 @@ Events:
 		Patterns:
 			[on] [skellett] entity teleport
 		Event values:
-			event-entity
 			event-location
-			event-commandsender
+			event-entity
 			event-world
+			event-commandsender
 			future event-location
 		Cancellable: true
 	On firework explo(de|sion):
@@ -2790,36 +2790,36 @@ Events:
 		Patterns:
 			[on] [skellett] firework explo(de|sion)
 		Event values:
+			event-location
+			event-projectile
 			event-entity
 			event-fireworkeffect
-			event-location
-			event-commandsender
-			event-projectile
 			event-world
+			event-commandsender
 		Cancellable: true
 	On item[ ][stack] (despawn|remove|delete):
 		ID: item[_][stack]_(despawn|remove|delete)
 		Patterns:
 			[on] [skellett] item[ ][stack] (despawn|remove|delete)
 		Event values:
-			event-entity
 			event-location
 			event-itementity
 			event-itemtype
-			event-commandsender
+			event-entity
 			event-world
+			event-commandsender
 		Cancellable: true
 	On item[ ][stack] (merge|combine[d]):
 		ID: item[_][stack]_(merge|combine[d])
 		Patterns:
 			[on] [skellett] item[ ][stack] (merge|combine[d])
 		Event values:
-			event-entity
 			event-location
 			event-itementity
 			event-itemtype
-			event-commandsender
+			event-entity
 			event-world
+			event-commandsender
 			future event-itementity
 		Cancellable: true
 	On off[ ]hand (switch|move):
@@ -2827,8 +2827,8 @@ Events:
 		Patterns:
 			[on] [skellett] off[ ]hand (switch|move)
 		Event values:
-			event-player
 			event-itemstack
+			event-player
 			event-world
 		Cancellable: true
 	On slime split:
@@ -2836,21 +2836,21 @@ Events:
 		Patterns:
 			[on] [skellett] slime split
 		Event values:
-			event-entity
 			event-location
-			event-commandsender
+			event-entity
 			event-world
+			event-commandsender
 		Cancellable: true
 	On spawner spawn:
 		ID: spawner_spawn
 		Patterns:
 			[on] [skellett] spawner spawn
 		Event values:
-			event-entity
 			event-location
-			event-commandsender
 			event-block
+			event-entity
 			event-world
+			event-commandsender
 		Cancellable: true
 	Periodical:
 		ID: periodical

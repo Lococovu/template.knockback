@@ -1,25 +1,3 @@
-# Web
-effect send [get] [web] request to %string% and return as %string%:
-  trigger:
-    send a request to "%expression-1%"
-    set {_response} to last http response's body
-
-    set {responses::%expression-2%::body} to {_response}
-
-effect send post [web] request to %string% ([with] body|,) %string% and return as %string%:
-  trigger:
-    send a "post" request to "%expression-1%" with the headers "Content-Type: application/json" and the body "%expression-2%"
-    set {_response} to last http response's body
-
-    set {responses::%expression-3%::body} to {_response}
-
-# Account
-function getAccountID(player: player) :: string:
-  set {_name} to {_player}'s display name
-  set {_ip} to {_player}'s ip
-
-  set {_id} to "%{_name}% at %{_ip}%" hashed with SHA-256
-  return {_id}
 
 # Notification
 function sendNotification(player: player, text: string, time: number):

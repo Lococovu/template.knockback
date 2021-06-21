@@ -12,61 +12,61 @@ Events:
 		Patterns:
 			[on] anvil [item] rename
 		Event values:
-			event-inventory
-			event-string
-			event-player
 			event-itemstack
+			event-string
+			event-inventory
+			event-player
 		Cancellable: true
 	On GUI click:
 		ID: gui_click
 		Patterns:
 			[on] gui (action|click)
 		Event values:
-			event-inventory
+			event-itemstack
 			event-string
+			event-inventory
+			event-clicktype
 			event-player
 			event-integer
-			event-itemstack
-			event-clicktype
 		Cancellable: true
 	On Inventory drag:
 		ID: inventory_drag
 		Patterns:
 			[on] inventory drag
 		Event values:
-			event-inventory
-			event-string
-			event-player
 			event-itemstack
+			event-string
+			event-inventory
+			event-player
 		Cancellable: true
 	On Inventory move:
 		ID: inventory_move
 		Patterns:
 			[on] inventory move
 		Event values:
+			event-itemstack
 			event-string
 			event-player
-			event-itemstack
 		Cancellable: true
 	On Item craft:
 		ID: item_craft
 		Patterns:
 			[on] [tuske] prepare item craft
 		Event values:
-			event-inventory
 			event-recipe
-			event-player
 			event-slot
 			event-itemstack
+			event-inventory
+			event-player
 		Cancellable: false
 	On Item damage:
 		ID: item_damage
 		Patterns:
 			[on] [player] item damage
 		Event values:
-			event-player
-			event-itemtype
 			event-itemstack
+			event-itemtype
+			event-player
 			event-world
 		Cancellable: true
 	On Spawner spawn:
@@ -74,11 +74,11 @@ Events:
 		Patterns:
 			[on] [mob] spawner spawn
 		Event values:
-			event-entity
 			event-location
-			event-commandsender
 			event-block
+			event-entity
 			event-world
+			event-commandsender
 		Cancellable: true
 Conditions:
 	CondCanEat:
