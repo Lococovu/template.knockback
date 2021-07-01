@@ -1,4 +1,4 @@
-function PlayerEntry(player: player):
+function PlayerEntry(player: player, empty: boolean):
   # Настройки
   set {_player}'s gamemode to survival
   clear {_player}'s inventory
