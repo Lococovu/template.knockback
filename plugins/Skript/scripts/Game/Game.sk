@@ -197,12 +197,6 @@ on death:
 
   force player to respawn
   set death message to ""
-
-command setSpawn [<string>]:
-  trigger:
-    set {game.%arg-1%.spawn} to player's location
-    if {games::*} doesn't contain arg-1:
-      add arg 1 to {games::*}
       
 on respawn:
   teleport player to {game.%{game.currentId}%.spawn}

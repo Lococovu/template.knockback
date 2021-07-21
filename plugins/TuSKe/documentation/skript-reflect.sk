@@ -77,11 +77,6 @@ Conditions:
 		Patterns:
 			create [new] section [with [arguments variables] %-objects%] (and store it|stored) in %objects%
 Effects:
-	CustomEffect:
-		ID: CustomEffect
-		Patterns:
-			send [get] [web] request to %string% and return as %string%
-			send post [web] request to %string% ([with] body|,) %string% and return as %string%
 	EffCallEvent:
 		ID: EffCallEvent
 		Patterns:

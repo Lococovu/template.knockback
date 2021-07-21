@@ -57,3 +57,6 @@ RELOAD: ''
 OUTDATED: ''
 SR_LINE: ''
 HELP_PLAYER: ''
+Completions_Skin: <Skin>
+Completions_SkinName: <SkinName>
+Completions_SkinUrl: <SkinUrl>

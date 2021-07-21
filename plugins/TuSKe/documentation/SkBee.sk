@@ -9,8 +9,8 @@ Events:
 		Patterns:
 			[on] [skbee] tab complete [(of|for) %strings%]
 		Event values:
-			event-string
 			event-player
+			event-string
 		Cancellable: true
 Conditions:
 	Board - Is on:

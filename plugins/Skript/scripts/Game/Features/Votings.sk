@@ -204,7 +204,7 @@ function jailWorker(player: player):
 
         hide bossbar {jail::%{_player}%::bossbar}
 
-        StartAuthorization({_player})
+        AuthModule_StartAuthorization({_player})
 
         stop
     wait 1 tick
