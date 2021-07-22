@@ -11,9 +11,9 @@ Events:
 		Patterns:
 			[on] holo[gram] [line] click
 		Event values:
-			event-player
-			event-hologramline
 			event-hologram
+			event-hologramline
+			event-player
 		Cancellable: false
 	On Hologram Line Touch:
 		ID: hologram_line_touch
@@ -28,10 +28,10 @@ Events:
 		Patterns:
 			[on] holo[gram] [line] touch
 		Event values:
-			event-player
+			event-hologram
 			event-hologramline
 			event-itemtype
-			event-hologram
+			event-player
 		Cancellable: false
 Conditions:
 	Can See Hologram:

@@ -1,6 +1,0 @@
-on join:
-  PlayerEntry(player)
-
-command entry:
-  trigger:
-    PlayerEntry(player)

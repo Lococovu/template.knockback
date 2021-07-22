@@ -19,8 +19,9 @@ function wp_pearl_cooldown(player: player):
       stop
 
     set {_temp} to getTimeIcon(round(6 - {_cooldown}))
-    set {_temp}'s name to "##"
-    replace all "##" in {_temp}'s name with "&e%first {_cooldown} characters of {_template::full}%&7%first 6 - {_cooldown} characters of {_template::empty}%"
+    set {_string} to "##"
+    replace all "##" in {_string} with "&e%first {_cooldown} characters of {_template::full}%&7%first 6 - {_cooldown} characters of {_template::empty}%"
+    set {_temp}'s display name to {_string}
 
     set slot {_slot} of {_player}'s inventory to {_temp} 
 

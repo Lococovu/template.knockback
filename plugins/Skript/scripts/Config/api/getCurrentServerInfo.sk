@@ -1,0 +1,11 @@
+options:
+  name: Knockback
+  type: game
+
+# 
+function getServerName() :: string:
+  return "{@name}"
+
+#
+function getServerType() :: string:
+  return "{@type}"

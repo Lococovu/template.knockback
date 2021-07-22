@@ -1,4 +1,6 @@
 function PlayerEntry(player: player):
+  set {authorized::%{_player}%} to true
+
   # Настройки
   set {_player}'s gamemode to survival
   clear {_player}'s inventory

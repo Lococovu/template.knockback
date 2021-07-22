@@ -242,23 +242,23 @@ databases:
 		# Set this to 0 to disable this feature.
 		
 		
-	MySQL example:
+	network:
 		# A MySQL database example, with options unrelated to MySQL removed.
 		
-		type: disabled# change to line below to enable this database
-		# type: MySQL
+		# type: disabled# change to line below to enable this database
+		type: MySQL
 		
 		pattern: synced_.*# this pattern will save all variables that start with 'synced_' in this MySQL database.
 		
-		host: localhost
+		host: 140.238.219.72
 		port: 3306
-		user: root
-		password: pass
-		database: skript
-		table: variables21
+		user: dog
+		password: 12344321
+		database: network
+		table: variables
 		
 		monitor changes: true
-		monitor interval: 20 seconds
+		monitor interval: 1 second
 		
 	SQLite example:
 		# An SQLite database example.

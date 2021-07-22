@@ -21,8 +21,9 @@ function wp_bow_cooldown(player: player):
       stop
 
     set {_temp} to getTimeIcon(round(5 - {_cooldown}))
-    set {_temp}'s name to "##"
-    replace all "##" in {_temp}'s name with "&e%first {_cooldown} characters of {_template::full}%&7%first 5 - {_cooldown} characters of {_template::empty}%"
+    set {_string} to "##"
+    replace all "##" in {_string} "&e%first {_cooldown} characters of {_template::full}%&7%first 5 - {_cooldown} characters of {_template::empty}%"
+    set {_temp}'s display name to {_string}
 
     if {temp.%{_player}%.hit} is set:
       delete {temp.%{_player}%.hit}
