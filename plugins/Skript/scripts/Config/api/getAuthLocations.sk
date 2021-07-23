@@ -5,15 +5,15 @@ function ConfigModule_getAuthLocation() :: location:
 
 # 
 function ConfigModule_getGuestHoloLocation() :: location: 
-  set {_location} to getLocation("-17.5, 4, -190", "lobby")
+  set {_location} to getLocation("-17.5, 5.5, -190", "lobby")
   return {_location}
 
 # 
 function ConfigModule_getWebHoloLocation() :: location:
-  set {_location} to getLocation("-13, 4, -190", "lobby")
+  set {_location} to getLocation("-13, 5.5, -190", "lobby")
   return {_location}
 
 # 
 function ConfigModule_getCenteredHoloLocation() :: location:
-  set {_location} to getLocation("-15.5, 4, -189.5", "lobby")
+  set {_location} to getLocation("-15.5, 5.5, -189.5", "lobby")
   return {_location}

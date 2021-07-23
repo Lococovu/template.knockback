@@ -13,6 +13,9 @@ function PlayerEntry(player: player):
   defaultActions_populate({_player})
   StartViewWorker({_player})
 
+  if {jail::%{_player}%::time} > 0:
+    jailWorker({_player})
+
 # checkGame
 function checkGame():
   if {game.currentId} is not set:
